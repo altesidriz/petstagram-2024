@@ -1,0 +1,12 @@
+{
+  "name": "petstagram-2024",
+  "version": "1.0.0",
+  "description": "Pets Photos Catalog Page build with Express.js, MongoDB+Mongoose and Handlebars",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
