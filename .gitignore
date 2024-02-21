@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 #custom
-.pdf
+*.pdf
+*.md
