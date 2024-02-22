@@ -1,6 +1,4 @@
 const router = require('express').Router();
-
-const { Router } = require('express');
 const userManager = require('../managers/userManager');
 
 
@@ -12,9 +10,11 @@ router.get('/login', (req, res)=> {
 router.post('/login', async (req, res) => {
     const {username, password} = req.body;
 
-    await userManager.login(username, password);
+    const token = await userManager.login(username, password);
 
-    res.send('Loged in')
+    res.cookie('access_token', token);
+
+    res.redirect('/');
 });
 
 // ********** REGISTER CRUD OPERATIONS **********
@@ -27,10 +27,13 @@ router.post('/register', async (req, res) => {
 
     await userManager.register({username, email, password, rePassword});
 
-    res.send('User has registered')
+    res.redirect('/users/login')
 });
 
 // ********** LOGOUT CRUD OPERATIONS **********
-
+router.get('/logout', (req, res) => {
+    res.clearCookie('access_token');
+    res.redirect('/');
+})
 
 module.exports = router;
