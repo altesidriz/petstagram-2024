@@ -36,7 +36,3 @@ exports.register = async (userData) => {
 
     return User.create(userData);
 }
-
-exports.logout = () => {
-
-};
