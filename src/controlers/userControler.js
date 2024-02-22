@@ -1,38 +1,39 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
+const { TOKEN } = require('../config/config')
 
 
 // ********** LOGIN CRUD OPERATIONS **********
-router.get('/login', (req, res)=> {
+router.get('/login', (req, res) => {
     res.render('users/login')
 });
 
 router.post('/login', async (req, res) => {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
     const token = await userManager.login(username, password);
 
-    res.cookie('access_token', token);
+    res.cookie(TOKEN, token);
 
     res.redirect('/');
 });
 
 // ********** REGISTER CRUD OPERATIONS **********
-router.get('/register', (req, res)=> {
+router.get('/register', (req, res) => {
     res.render('users/register')
 });
 
 router.post('/register', async (req, res) => {
-    const {username, email, password, rePassword} = req.body;
+    const { username, email, password, rePassword } = req.body;
 
-    await userManager.register({username, email, password, rePassword});
+    await userManager.register({ username, email, password, rePassword });
 
     res.redirect('/users/login')
 });
 
 // ********** LOGOUT CRUD OPERATIONS **********
 router.get('/logout', (req, res) => {
-    res.clearCookie('access_token');
+    res.clearCookie(TOKEN);
     res.redirect('/');
 })
 
