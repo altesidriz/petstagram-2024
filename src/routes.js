@@ -9,6 +9,9 @@ const userControler = require('./controlers/userControler');
 
 router.use(homeControler);
 router.use('/users', userControler);
+router.get('*', (req, res)=>{
+    res.redirect('404');
+})
 
 
  module.exports = router;

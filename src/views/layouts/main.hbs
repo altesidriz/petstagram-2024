@@ -11,15 +11,14 @@
 <!-- Starts Body Section -->
 
 <body>
-    <!--Error Container-->
-
-    <!-- <div>
+    {{#if error}}
+    <div>
         <div class="errorContainer">
-            <p>Error</p>
+            <p>{{error}}</p>
         </div>
-    </div> -->
+    </div> 
+    {{/if}}
 
-    <!-- Starts Header Section with Navigation Bar -->
     <header>
         <nav class="navbar">
             <div class="container">
@@ -36,12 +35,28 @@
                 <div class="nav-links">
                     <ul class="nav-group">
                         <li class="nav-item">
-                            <!-- Link to Catalog Page -->
                             <a href="#">
                                 <i>Catalog</i>
                             </a>
                         </li>
+                        {{#if isAuthenticated}}
+                        <li class="nav-item">
 
+                            <a href="#">
+                                <i>Add Photo</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">
+                                <i>Profile</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users/logout">
+                                <i>Logout</i>
+                            </a>
+                        </li>
+                        {{else}}
                         <li class="nav-item">
                             <a href="/users/login">
                                 <i>Login</i>
@@ -52,26 +67,8 @@
                                 <i>Register</i>
                             </a>
                         </li>
+                        {{/if}}
 
-                        <!--For login users-->
-                        <li class="nav-item">
-                            <!-- Link to Add Photo Page -->
-                            <a href="#">
-                                <i>Add Photo</i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <!-- Link to Profile Page -->
-                            <a href="#">
-                                <i>Profile</i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/users/logout">
-                                <i>Logout</i>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
