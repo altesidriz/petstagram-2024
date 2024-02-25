@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const { auth } = require('./middlewares/authMiddleware');
-const { errorHandler } = require('./middlewares/errorHandMiddleware');
+// const { errorHandler } = require('./middlewares/errorHandMiddleware');
 const routes = require('./routes');
 
 
@@ -28,6 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(auth);
 app.use(routes);
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.listen(5000, console.log('Server is running on 5000...'));
