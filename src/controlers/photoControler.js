@@ -35,7 +35,38 @@ router.get('/:photoId/details', async (req, res) => {
     const isOwner = req.user?._id === photo.owner._id.toString(); //or .toString() coz it returns new ObjectId
 
 
-    res.render('photos/details', {photo, isOwner})
+    res.render('photos/details', { photo, isOwner })
 })
+
+router.get('/:photoId/delete', async (req, res) => {
+    const photoId = req.params.photoId;
+    try {
+        await photoManager.delete(photoId);
+        res.redirect('/photos');
+    } catch (error) {
+        res.render('photos/details', { error: 'Unsuccessfull operation!' })
+    }
+});
+
+router.get('/:photoId/edit', async (req, res) => {
+
+    const photo = await photoManager.getOne(req.params.photoId).lean();
+    res.render('photos/edit', { photo });
+});
+
+router.post('/:photoId/edit', async (req, res) => {
+    const photoData = req.body;
+    const photoId = req.params.photoId;
+    try {
+        await photoManager.edit(photoId, photoData);
+
+        res.redirect(`/photos/${photoId}/details`);
+
+    } catch (error) {
+
+        res.render('photos/edit', { error: 'Unable to update photo', ...photoData })
+    }
+});
+
 
 module.exports = router;
